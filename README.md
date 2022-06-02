@@ -5,7 +5,7 @@ Highly configurable script that automates generation of ubuntu's cloud image tem
 
 ## Download the script
 ```shell
-wget -o proxmox-cloud-image-generator.sh "https://raw.githubusercontent.com/bermanboris/proxmox-cloud-image-generator/main/proxmox-cloud-image-generator.sh"
+wget -O proxmox-cloud-image-generator.sh "https://raw.githubusercontent.com/bermanboris/proxmox-cloud-image-generator/main/proxmox-cloud-image-generator.sh"
 ```
 
 ## Configure the script using provided variables
