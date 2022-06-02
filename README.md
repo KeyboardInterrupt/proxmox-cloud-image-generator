@@ -1,5 +1,14 @@
 # proxmox-cloud-image-generator
-Highly configurable script that automates generation of ubuntu's cloud image templates. Approximate size of downloaded Ubuntu image is `597M`. 
+Highly configurable script that automates generation of ubuntu's cloud image templates. 
+Customize the cloud image using the script without manually editing settings using GUI. 
+
+Script allows you to specify:
+- Ubuntu Release: 20.04 / 21.10 / 22.04 / 22.10 (Default: 22.04)
+- Template name (Default: ubuntu-22.04-cloudimg)
+- Proxmox's Storage Pool where template will be saved (Default: local-lvm)
+- Template VM ID (Default 10000)
+- Credentials (Default: boris/secret)
+- Packages that you would like to add to the final image such as `htop` (Default: qemu-guest-agent)
 
 # Usage:
 
@@ -29,6 +38,8 @@ export PACKAGES_TO_INSTALL="qemu-guest-agent"
 ```shell
 bash proxmox-cloud-image-generator.sh
 ```
+
+> Approximate size of downloaded Ubuntu image is `597M`. 
 
 
 # Roadmap
