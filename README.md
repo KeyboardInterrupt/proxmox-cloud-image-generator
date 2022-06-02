@@ -30,8 +30,8 @@ export VM_ID="10000"
 export USERNAME="boris"
 export PASSWORD="secret"
 
-# You can add your own packages by splitting them with space between
-export PACKAGES_TO_INSTALL="qemu-guest-agent"
+# You can add your own packages by splitting them with comma between
+export PACKAGES_TO_INSTALL="qemu-guest-agent,htop"
 ```
 
 ## Run the script
