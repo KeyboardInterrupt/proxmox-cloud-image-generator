@@ -40,7 +40,7 @@ wget $CLOUD_IMAGE_URL
 
 # Install libguestfs-tools on Proxmox server.
 echo "Installing image customization tools, it can take some time..."
-apt-get install libguestfs-tools
+apt-get install -y libguestfs-tools
 
 # Add packages (qemu-guest-agent) to Ubuntu image.
 virt-customize -a $CLOUD_IMAGE_NAME --install $PACKAGES_TO_INSTALL
