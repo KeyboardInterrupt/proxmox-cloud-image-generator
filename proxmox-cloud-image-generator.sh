@@ -23,13 +23,12 @@ export VM_ID="10000"
 export USERNAME="boris"
 export PASSWORD="secret"
 
+# You can add your own packages by splitting them with space between
+export PACKAGES_TO_INSTALL="qemu-guest-agent"
+
 # System variables, DO NOT CHANGE them
 export CLOUD_IMAGE_NAME="${ubuntu_image[$UBUNTU_RELEASE]}"
 export CLOUD_IMAGE_URL="${ubuntu_links[$UBUNTU_RELEASE]}"
-
-
-# You can add your own packages by splitting them with space between
-export PACKAGES_TO_INSTALL="qemu-guest-agent"
 
 # Switch into temporary directory
 cd `mktemp -d`
