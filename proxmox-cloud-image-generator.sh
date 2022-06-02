@@ -16,10 +16,12 @@ declare -A ubuntu_image=(
 
 
 # Set environment variables. Change these as necessary.
-export UBUNTU_RELEASE="22.04" # Supported versions: 20.04, 21.10, 22.04, 22.10
+export UBUNTU_RELEASE="22.04" # Available versions: 20.04, 21.10, 22.04, 22.10
 export VM_NAME="ubuntu-${UBUNTU_RELEASE}-cloudimg"
 export STORAGE_POOL="local-lvm"
 export VM_ID="10000"
+export USERNAME="boris"
+export PASSWORD="secret"
 
 # System variables, DO NOT CHANGE them
 export CLOUD_IMAGE_NAME="${ubuntu_image[$UBUNTU_RELEASE]}"
@@ -53,6 +55,8 @@ qm importdisk $VM_ID $CLOUD_IMAGE_NAME $STORAGE_POOL
 qm set $VM_ID --scsihw virtio-scsi-pci --scsi0 $STORAGE_POOL:vm-$VM_ID-disk-0
 qm set $VM_ID --agent enabled=1,fstrim_cloned_disks=1
 qm set $VM_ID --name $VM_NAME
+qm set $VM_ID --ciuser $USERNAME
+qm set $VM_ID --cipassword $PASSWORD
 
 # Create Cloud-Init Disk and configure boot.
 qm set $VM_ID --ide2 $STORAGE_POOL:cloudinit
