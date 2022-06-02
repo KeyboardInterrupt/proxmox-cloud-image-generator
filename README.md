@@ -25,3 +25,4 @@ bash proxmox-cloud-image-generator.sh
 - [x] Set VM name 
 - [x] Choose ubuntu release easily
 - [ ] Provide SSH key using the script  
+- [ ] Remove temp directory created by the script
