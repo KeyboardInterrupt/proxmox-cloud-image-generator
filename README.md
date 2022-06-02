@@ -13,6 +13,18 @@ wget -o proxmox-cloud-image-generator.sh "https://raw.githubusercontent.com/berm
 nano proxmox-cloud-image-generator.sh
 ```
 
+```shell
+export UBUNTU_RELEASE="22.04" # Available versions: 20.04, 21.10, 22.04, 22.10
+export VM_NAME="ubuntu-${UBUNTU_RELEASE}-cloudimg"
+export STORAGE_POOL="local-lvm"
+export VM_ID="10000"
+export USERNAME="boris"
+export PASSWORD="secret"
+
+# You can add your own packages by splitting them with space between
+export PACKAGES_TO_INSTALL="qemu-guest-agent"
+```
+
 ## Run the script
 ```shell
 bash proxmox-cloud-image-generator.sh
