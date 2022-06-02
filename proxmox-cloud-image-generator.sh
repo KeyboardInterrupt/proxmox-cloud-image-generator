@@ -23,8 +23,8 @@ export VM_ID="10000"
 export USERNAME="boris"
 export PASSWORD="secret"
 
-# You can add your own packages by splitting them with space between
-export PACKAGES_TO_INSTALL="qemu-guest-agent"
+# You can add your own packages by splitting them with comma between
+export PACKAGES_TO_INSTALL="qemu-guest-agent,htop"
 
 # System variables, DO NOT CHANGE them
 export CLOUD_IMAGE_NAME="${ubuntu_image[$UBUNTU_RELEASE]}"
