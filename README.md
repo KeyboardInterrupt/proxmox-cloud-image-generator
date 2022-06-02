@@ -1,5 +1,5 @@
 # proxmox-cloud-image-generator
-Highly configurable script that automates generation of ubuntu's cloud image templates 
+Highly configurable script that automates generation of ubuntu's cloud image templates. Approximate size of downloaded Ubuntu image is `597M`. 
 
 # Usage:
 
