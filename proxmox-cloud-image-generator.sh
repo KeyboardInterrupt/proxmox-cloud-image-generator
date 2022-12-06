@@ -14,14 +14,15 @@ declare -A ubuntu_image=(
   ["22.10"]="kinetic-server-cloudimg-amd64.img"
 )
 
+# Install libguestfs-tools (dependency) on Proxmox server.
+echo "Installing image customization tools, it can take some time..."
+apt-get install -y libguestfs-tools
 
 # Set environment variables. Change these as necessary.
 export UBUNTU_RELEASE="22.04" # Available versions: 20.04, 21.10, 22.04, 22.10
 export VM_NAME="ubuntu-${UBUNTU_RELEASE}-cloudimg"
 export STORAGE_POOL="local-lvm"
 export VM_ID="10000"
-export USERNAME="boris"
-export PASSWORD="secret"
 
 # You can add your own packages by splitting them with comma between
 export PACKAGES_TO_INSTALL="qemu-guest-agent,htop"
@@ -38,9 +39,7 @@ wget $CLOUD_IMAGE_URL
 
 # Customize the downloaded image
 
-# Install libguestfs-tools on Proxmox server.
-echo "Installing image customization tools, it can take some time..."
-apt-get install -y libguestfs-tools
+
 
 # Add packages (qemu-guest-agent) to Ubuntu image.
 virt-customize -a $CLOUD_IMAGE_NAME --install $PACKAGES_TO_INSTALL
@@ -49,15 +48,16 @@ virt-customize -a $CLOUD_IMAGE_NAME --install $PACKAGES_TO_INSTALL
 virt-customize -a $CLOUD_IMAGE_NAME --run-command "sed -i 's/.*PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config"
 
 # Create Proxmox VM image from Ubuntu Cloud Image.
-qm create $VM_ID --cpu cputype=host --cores 2 --memory 2048 --net0 virtio,bridge=vmbr0
+qm create $VM_ID --cpu cputype=host --cores 4 --memory 4096 --net0 virtio,bridge=vmbr0
 qm importdisk $VM_ID $CLOUD_IMAGE_NAME $STORAGE_POOL
 qm set $VM_ID --scsihw virtio-scsi-pci --scsi0 $STORAGE_POOL:vm-$VM_ID-disk-0
 qm set $VM_ID --agent enabled=1,fstrim_cloned_disks=1
 qm set $VM_ID --name $VM_NAME
-qm set $VM_ID --ciuser $USERNAME
-qm set $VM_ID --cipassword $PASSWORD
 
 # Create Cloud-Init Disk and configure boot.
 qm set $VM_ID --ide2 $STORAGE_POOL:cloudinit
 qm set $VM_ID --boot c --bootdisk scsi0
 qm set $VM_ID --serial0 socket --vga serial0
+
+# Convert VM into Template
+qm template $MV_ID
